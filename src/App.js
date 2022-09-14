@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import Header from "./components/header";
 import Countries from "./components/countries/countries";
@@ -5,13 +6,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Country from "./components/countries/country";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const switchMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <div className="App">
+    <div className={`app ${darkMode ? 'darkMode' : ''}`} >
       <BrowserRouter>
-        <Header />
+        <Header onClick={switchMode} darkMode={darkMode}/>
         <Routes>
-          <Route path="/" element={<Countries />} />
-          <Route path="country" element={<Country />} />
+          <Route path="/" element={<Countries darkMode={darkMode}/>} />
+          <Route path="country" element={<Country darkMode={darkMode} />} />
         </Routes>
       </BrowserRouter>
     </div>

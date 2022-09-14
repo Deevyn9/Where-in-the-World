@@ -2,16 +2,16 @@ import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import Flag from "../countries/belgium-flag.jpg"
 
-const Countries = () => {
+const Countries = ({darkMode}) => {
   return (
-    <div className="app-body">
+    <div className={`app-body ${darkMode ? 'darkmode' : ''}`}>
       <div className="filters">
-        <div className="search-bar">
+        <div className={`search-bar ${darkMode ? 'darkMode' : ''}`}>
           <SearchIcon />
           <input type="text" placeholder="Search for a country..." />
         </div>
-        <div className="select-bar">
-          <select placeholder="Filter by region">
+        <div className={`select-bar ${darkMode ? 'darkMode' : ''}`}>
+          <select>
             <option disabled selected>
               Filter by Region
             </option>
@@ -24,7 +24,7 @@ const Countries = () => {
         </div>
       </div>
 
-      <div className="countries">
+      <div className={`countries ${darkMode ? 'darkMode' : ''}`}>
         <div className="country-container">
           <div className="image-container">
             <img src={Flag} alt="can't load image" />
