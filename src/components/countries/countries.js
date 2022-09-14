@@ -31,7 +31,7 @@ const Countries = ({darkMode}) => {
           </div>
 
           <div className="country-details">
-            <h3>Germany</h3>
+            <h3>Belgium</h3>
 
             <p>
               Population: <span className="value">81,770,900</span>
