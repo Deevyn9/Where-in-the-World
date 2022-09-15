@@ -17,6 +17,13 @@ body {
     font-family: 'DM Sans', sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 700;
+    /* color: white; */
+}
+
 .isloading {
     display: flex;
     justify-content: center;
@@ -129,7 +136,7 @@ body {
 
 .country-container {
     width: 270px;
-    height: 370px;
+    min-height: 370px;
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform .7s ease;
@@ -160,10 +167,14 @@ body {
 
 .country-container .country-details p {
     margin-bottom: 8px;
-}
+ }
 
 .country__page {
     padding: 50px 5%;
+}
+
+.back-container {
+    display: inline-block;
 }
 
 .country__page .goback {
@@ -173,9 +184,10 @@ body {
     gap:5px;
     width: 130px;
     height: 50px;
+    text-decoration: none;
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: .5s ease;
+    transition: transform .5s ease;
 }
 
 .country__page .goback:hover {
@@ -230,10 +242,9 @@ body {
 
 .countrydetails__sub p {
     margin-bottom: 7px;
-    font-weight: 700;
 }
 
-.countrydetails__sub p .values {
+span {
     font-weight: 200;
 }
 
