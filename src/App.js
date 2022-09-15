@@ -7,7 +7,7 @@ import Country from "./components/countries/country";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-
+  
   const switchMode = () => {
     setDarkMode(!darkMode);
   };
@@ -17,8 +17,8 @@ function App() {
       <BrowserRouter>
         <Header onClick={switchMode} darkMode={darkMode}/>
         <Routes>
-          <Route path="/" element={<Countries darkMode={darkMode}/>} />
-          <Route path="country" element={<Country darkMode={darkMode} />} />
+          <Route path="/" exact element={<Countries darkMode={darkMode}/>} />
+          <Route path="/:capital" element={<Country darkMode={darkMode} />} />
         </Routes>
       </BrowserRouter>
     </div>
