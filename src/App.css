@@ -205,9 +205,8 @@ a {
 
 .country__page-main .flag__container {
     height: 300px;
-    min-width: 500px;
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
-}
+    width: 500px;
+    }
 
 .country__page-main .flag__container img  {
     height: 100%;
@@ -261,6 +260,12 @@ span {
     cursor: pointer;
 }
 
+@media (min-width: 1000px) {
+    .country__page-main .flag__container {
+    min-width: 500px;
+    }
+}
+
 @media (max-width: 1000px) {
     .country__page-main {
         flex-direction: column;
@@ -268,7 +273,7 @@ span {
     }
 
     .country-container {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
     .main__countrydetails {
@@ -321,6 +326,7 @@ span {
 
     .app-body .filters .select-bar select {
         width: 40%;
+        margin-top: 30px;
     }
 }
 
