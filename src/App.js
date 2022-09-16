@@ -119,7 +119,7 @@ function App() {
                   <select ref={regionRef} onChange={selectRegion}>
                     <option>All</option>
                     <option>Africa</option>
-                    <option>America</option>
+                    <option>Americas</option>
                     <option>Asia</option>
                     <option>Europe</option>
                     <option>Oceania</option>

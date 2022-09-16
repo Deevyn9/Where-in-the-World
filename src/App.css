@@ -47,11 +47,11 @@ a {
 .app {
     min-height: 100vh;
     width: 100vw;
-        transition: all .2s ease;
+    transition: all .2s ease;
 }
 
 .app.darkMode {
-    background-color: var(--dark-mode-elements);
+    background-color: var(--dark-mode-bg);
     color: white;
 }
 
@@ -80,6 +80,10 @@ a {
     height: 50px;
     width: 400px;
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar.darkMode {
+    background-color: var(--dark-mode-elements);
 }
 
 .search-bar input {
@@ -119,6 +123,7 @@ a {
 .select-bar select option {
     background-color: white;
     color: black;
+    outline: none;
 }
 
 .select-bar.darkMode select option {
@@ -135,11 +140,15 @@ a {
 }
 
 .country-container {
-    width: 250px;
+    width: 270px;
     min-height: 370px;
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform .7s ease;
+}
+
+.country-container.darkMode {
+    background-color: var(--dark-mode-elements);
 }
 
 .country-container:hover {
@@ -147,7 +156,7 @@ a {
 }
 
 .country-container .image-container {
-    width: 250px;
+    width: 270px;
     height: 170px;
 }
 

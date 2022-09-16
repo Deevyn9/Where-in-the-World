@@ -1,6 +1,7 @@
 import React from "react";
 
 const Countries = ({
+  darkMode,
   name,
   capital,
   population,
@@ -15,7 +16,7 @@ const Countries = ({
 
   return (
     <div
-      className="country-container"
+      className={`country-container ${darkMode? "darkMode" : ""}`}
       // showDetails={showDetails}
       onClick={showDetailsHandler}
     >
