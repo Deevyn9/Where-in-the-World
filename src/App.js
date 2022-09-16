@@ -100,66 +100,68 @@ function App() {
   return (
     <div className={`app ${darkMode ? "darkMode" : ""}`}>
       <Header onClick={switchMode} darkMode={darkMode} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div className={`app-body ${darkMode ? "darkmode" : ""}`}>
-              <div className="filters">
-                <div className={`search-bar ${darkMode ? "darkMode" : ""}`}>
-                  <SearchIcon />
-                  <input
-                    type="text"
-                    placeholder="Search for a country..."
-                    ref={countriesInputRef}
-                    onChange={searchCountries}
-                  />
-                </div>
-                <div className={`select-bar ${darkMode ? "darkMode" : ""}`}>
-                  <select ref={regionRef} onChange={selectRegion}>
-                    <option>All</option>
-                    <option>Africa</option>
-                    <option>Americas</option>
-                    <option>Asia</option>
-                    <option>Europe</option>
-                    <option>Oceania</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className={`countries ${darkMode ? "darkMode" : ""}`}>
-                {!noCountries ? (
-                  countries.map((country) => (
-                    <Countries
-                      darkMode={darkMode}
-                      key={country.alpha3Code}
-                      code={country.alpha3Code}
-                      name={country.name}
-                      capital={country.capital}
-                      population={country.population}
-                      region={country.region}
-                      flag={country.flag}
-                      showDetails={showDetails}
+      <main>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div className={`app-body ${darkMode ? "darkmode" : ""}`}>
+                <div className="filters">
+                  <div className={`search-bar ${darkMode ? "darkMode" : ""}`}>
+                    <SearchIcon />
+                    <input
+                      type="text"
+                      placeholder="Search for a country..."
+                      ref={countriesInputRef}
+                      onChange={searchCountries}
                     />
-                  ))
-                ) : (
-                  <p>No Countries found...</p>
-                )}
+                  </div>
+                  <div className={`select-bar ${darkMode ? "darkMode" : ""}`}>
+                    <select ref={regionRef} onChange={selectRegion}>
+                      <option>All</option>
+                      <option>Africa</option>
+                      <option>Americas</option>
+                      <option>Asia</option>
+                      <option>Europe</option>
+                      <option>Oceania</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className={`countries ${darkMode ? "darkMode" : ""}`}>
+                  {!noCountries ? (
+                    countries.map((country) => (
+                      <Countries
+                        darkMode={darkMode}
+                        key={country.alpha3Code}
+                        code={country.alpha3Code}
+                        name={country.name}
+                        capital={country.capital}
+                        population={country.population}
+                        region={country.region}
+                        flag={country.flag}
+                        showDetails={showDetails}
+                      />
+                    ))
+                  ) : (
+                    <p>No Countries found...</p>
+                  )}
+                </div>
               </div>
-            </div>
-          }
-        />
-        <Route
-          path="/:countryCode"
-          element={
-            <Country
-              darkMode={darkMode}
-              countries={countries}
-              refetch={fetchData}
-            />
-          }
-        />
-      </Routes>
+            }
+          />
+          <Route
+            path="/:countryCode"
+            element={
+              <Country
+                darkMode={darkMode}
+                countries={countries}
+                refetch={fetchData}
+              />
+            }
+          />
+        </Routes>
+      </main>
     </div>
   );
 }
