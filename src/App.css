@@ -312,6 +312,10 @@ span {
         display: flex;
         flex-wrap: wrap;
     }
+
+    .border {
+        margin: 0 10px 10px 0;
+    }
 }
 
 @media (max-width:650px) {
