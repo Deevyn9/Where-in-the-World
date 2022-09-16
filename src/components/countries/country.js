@@ -1,51 +1,96 @@
 import React from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Flag from "../countries/belgium-flag.jpg";
+import { useParams, useNavigate } from "react-router";
+// import Countries from "./countries";
 
-const Country = ({ darkMode }) => {
+const Country = ({ darkMode, countries, refetch }) => {
+  const params = useParams();
+  const navigate = useNavigate();
+
+  let name;
+  let flagImg;
+  let nativeName;
+  let population;
+  let region;
+  let subregion;
+  let capital;
+  let topLevelDomain;
+  let currencies = [];
+  let languages = [];
+  let borders = [];
+
+  countries.forEach((country) => {
+    if (country.alpha3Code === params.countryCode) {
+      name = country.name;
+      flagImg = country.flag;
+      nativeName = country.nativeName;
+      population = country.population;
+      region = country.region;
+      subregion = country.subregion;
+      capital = country.capital;
+      topLevelDomain = country.topLevelDomain;
+
+      country.currencies?.forEach((currency) => {
+        currencies.push(currency.name);
+      });
+
+      country.languages?.forEach((language) => {
+        languages.push(language.name);
+      });
+
+      country.borders?.forEach((border) => {
+        borders.push(border);
+      });
+    }
+  });
+
+  const goBack = () => {
+    navigate("/");
+  };
+
   return (
     <div className="country__page">
-      <div className={`goback ${darkMode ? "darkmode" : ""}`}>
+      <div className={`goback ${darkMode ? "darkmode" : ""}`} onClick={goBack}>
         <ArrowBackIcon />
         <p>Back</p>
       </div>
 
       <div className="country__page-main">
         <div className="flag__container">
-          <img src={Flag} alt="can't load image" />
+          <img src={flagImg} alt="can't load" />
         </div>
         <div className="main__countrydetails">
-          <h2>Belgium</h2>
+          <h2>{name}</h2>
           <div className="countrydetails__sub">
             <div className="left">
               <p>
                 Native Name:{" "}
                 <span className={`values ${darkMode ? "darkMode" : ""}`}>
-                  Belgie
+                  {nativeName}
                 </span>
               </p>
               <p>
                 Population:{" "}
                 <span className={`values ${darkMode ? "darkMode" : ""}`}>
-                  11,319,511
+                  {population}
                 </span>
               </p>
               <p>
                 Region:{" "}
                 <span className={`values ${darkMode ? "darkMode" : ""}`}>
-                  Europe
+                  {region}
                 </span>
               </p>
               <p>
                 Sub Region:{" "}
                 <span className={`values ${darkMode ? "darkMode" : ""}`}>
-                  Western Europe
+                  {subregion}
                 </span>
               </p>
               <p>
                 Capital:{" "}
                 <span className={`values ${darkMode ? "darkMode" : ""}`}>
-                  Brussels
+                  {capital}
                 </span>
               </p>
             </div>
@@ -53,17 +98,54 @@ const Country = ({ darkMode }) => {
               <p>
                 Top Level Domain:{" "}
                 <span className={`values ${darkMode ? "darkMode" : ""}`}>
-                  .be
+                  {topLevelDomain}
                 </span>
               </p>
               <p>
-                Currencies:{" "}
-                <span className={`values ${darkMode ? "darkMode" : ""}`}>
-                  Euro
-                </span>
+                Currencies:
+                {currencies.map((currency) => {
+                  if (currency.indexOf(currency) !== currencies.length - 1) {
+                    return (
+                      <span className={`values ${darkMode ? "darkMode" : ""}`}>
+                        {" "}
+                        {currency},
+                      </span>
+                    );
+                  } else {
+                    return (
+                      <span className={`values ${darkMode ? "darkMode" : ""}`}>
+                        {" "}
+                        {currency}
+                      </span>
+                    );
+                  }
+                })}
               </p>
               <p>
                 Languages:{" "}
+                {languages.map((language) => {
+                  if (languages.indexOf(language) !== languages.length - 1) {
+                    return (
+                      <span
+                        key={language}
+                        className={`values ${darkMode ? "darkMode" : ""}`}
+                      >
+                        {" "}
+                        {language},
+                      </span>
+                    );
+                  } else {
+                    return (
+                      <span
+                        key={language}
+                        className={`values ${darkMode ? "darkMode" : ""}`}
+                      >
+                        {" "}
+                        {language}
+                      </span>
+                    );
+                  }
+                })}
                 <span className={`values ${darkMode ? "darkMode" : ""}`}>
                   Dutch, French, German
                 </span>
@@ -73,15 +155,20 @@ const Country = ({ darkMode }) => {
           <div className="borders">
             <h3>Border Countries: </h3>
             <div className="border-containers">
-              <div className={`border ${darkMode ? "darkMode" : ""}`}>
-                France
-              </div>
-              <div className={`border ${darkMode ? "darkMode" : ""}`}>
-                Germany
-              </div>
-              <div className={`border ${darkMode ? "darkMode" : ""}`}>
-                Netherlands
-              </div>
+              {borders.length ? (
+                borders.map((border) => (
+                    <div key={border} className={`border ${darkMode ? "darkMode" : ""}`}onClick={() => {
+                      refetch();
+                      navigate(`/${border}`)
+                    }}>
+                      {border}
+                    </div>
+                ))
+                  ) : (
+                    <div className={`values ${darkMode ? "darkMode" : ""}`}>
+                      <p>No borders...</p>
+                    </div>
+                  )}
             </div>
           </div>
         </div>
@@ -91,158 +178,3 @@ const Country = ({ darkMode }) => {
 };
 
 export default Country;
-
-// import React from "react";
-// import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-// import Flag from "../countries/belgium-flag.jpg";
-// import { useState, useEffect } from "react";
-// import { Link, useParams } from "react-router-dom";
-
-// const Country = ({ darkMode }) => {
-//   const [country, setCountry] = useState([]);
-//   const [isLoading, setIsLoading] = useState(true);
-//   const { capital } = useParams() ;
-
-//   useEffect(() => {
-//     const fetchCountryData = async () => {
-//       const res = await fetch(
-//         `http://api.countrylayer.com/v2/capital/${capital}?access_key=${process.env.REACT_APP_ACCESS_KEY}`
-//       );
-//       const data = await res.json();
-//       setCountry(data);
-//       console.log(data)
-//       setIsLoading(false);
-//     };
-
-//     fetchCountryData();
-//   }, [capital])
-
-//   return (
-//     <div>
-//       {isLoading ? (
-//         <h1 className="isloading">Loading..</h1>
-//       ) : (
-//         <div className="country__page">
-//           <Link to="/">
-//             <div className="back-container">
-//               <div className={`goback ${darkMode ? "darkmode" : ""}`}>
-//                 <ArrowBackIcon />
-//                 <p>Back</p>
-//               </div>
-//             </div>
-//           </Link>
-
-//           {country.map(
-//             ({
-//               name,
-//               region,
-//               capital,
-//               topLevelDomain,
-//               currencies,
-//               subregion,
-//               languages,
-//               nativeName,
-//             }) => (
-//               <Link to={`/${capital}`} key={name}>
-//                 <div className="country__page-main">
-//                   <div className="flag__container">
-//                     <img src={Flag} alt="can't load" />
-//                   </div>
-//                   <div className="main__countrydetails">
-//                     <h2>{name}</h2>
-//                     <div className="countrydetails__sub">
-//                       <div className="left">
-//                         <p>
-//                           Native Name:{" "}
-//                           <span
-//                             className={`values ${darkMode ? "darkMode" : ""}`}
-//                           >
-//                             {nativeName}
-//                           </span>
-//                         </p>
-//                         <p>
-//                           Population:{" "}
-//                           <span
-//                             className={`values ${darkMode ? "darkMode" : ""}`}
-//                           >
-//                             11,319,511
-//                           </span>
-//                         </p>
-//                         <p>
-//                           Region:{" "}
-//                           <span
-//                             className={`values ${darkMode ? "darkMode" : ""}`}
-//                           >
-//                             {region}
-//                           </span>
-//                         </p>
-//                         <p>
-//                           Sub Region:{" "}
-//                           <span
-//                             className={`values ${darkMode ? "darkMode" : ""}`}
-//                           >
-//                             {subregion}
-//                           </span>
-//                         </p>
-//                         <p>
-//                           Capital:{" "}
-//                           <span
-//                             className={`values ${darkMode ? "darkMode" : ""}`}
-//                           >
-//                             {capital}
-//                           </span>
-//                         </p>
-//                       </div>
-//                       <div className="right">
-//                         <p>
-//                           Top Level Domain:{" "}
-//                           <span
-//                             className={`values ${darkMode ? "darkMode" : ""}`}
-//                           >
-//                             {topLevelDomain}
-//                           </span>
-//                         </p>
-//                         <p>
-//                           Currencies:{" "}
-//                           <span
-//                             className={`values ${darkMode ? "darkMode" : ""}`}
-//                           >
-//                             {currencies}
-//                           </span>
-//                         </p>
-//                         <p>
-//                           Languages:{" "}
-//                           <span
-//                             className={`values ${darkMode ? "darkMode" : ""}`}
-//                           >
-//                             {languages}
-//                           </span>
-//                         </p>
-//                       </div>
-//                     </div>
-//                     <div className="borders">
-//                       <h3>Border Countries: </h3>
-//                       <div className="border-containers">
-//                         <div className={`border ${darkMode ? "darkMode" : ""}`}>
-//                           France
-//                         </div>
-//                         <div className={`border ${darkMode ? "darkMode" : ""}`}>
-//                           Germany
-//                         </div>
-//                         <div className={`border ${darkMode ? "darkMode" : ""}`}>
-//                           Netherlands
-//                         </div>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </Link>
-//             )
-//           )}
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Country;

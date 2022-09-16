@@ -135,7 +135,7 @@ a {
 }
 
 .country-container {
-    width: 270px;
+    width: 250px;
     min-height: 370px;
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
@@ -147,7 +147,7 @@ a {
 }
 
 .country-container .image-container {
-    width: 100%;
+    width: 250px;
     height: 170px;
 }
 
@@ -167,6 +167,7 @@ a {
 
 .country-container .country-details p {
     margin-bottom: 8px;
+    font-weight: 700;
  }
 
 .country__page {
@@ -204,7 +205,8 @@ a {
 
 .country__page-main .flag__container {
     height: 300px;
-    width: 500px;
+    min-width: 500px;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
 }
 
 .country__page-main .flag__container img  {
@@ -214,6 +216,7 @@ a {
 
 .border-containers {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
@@ -242,6 +245,7 @@ a {
 
 .countrydetails__sub p {
     margin-bottom: 7px;
+    font-weight: 700;
 }
 
 span {
@@ -254,6 +258,7 @@ span {
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
     height: 30px;
     width: 100px;
+    cursor: pointer;
 }
 
 @media (max-width: 1000px) {
