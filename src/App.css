@@ -36,6 +36,7 @@ a {
     display: flex;
     justify-content: space-between;
     padding: 20px 5%;
+    background-color: var(--light-mode-elements);
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -140,11 +141,13 @@ a {
 }
 
 .country-container {
-    width: 270px;
+    width: 260px;
     min-height: 370px;
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform .7s ease;
+    border-radius: 10px;
+    background-color: var(--light-mode-elements);
 }
 
 .country-container.darkMode {
@@ -156,13 +159,15 @@ a {
 }
 
 .country-container .image-container {
-    width: 270px;
+    width: 260px;
     height: 170px;
+    border-radius: inherit;
 }
 
 .country-container .image-container img {
     width: 100%;
     height: 100%;
+    border-radius: 10px 10px 0 0;
 }
 
 .country-container .country-details {
@@ -296,6 +301,10 @@ span {
 }
 
 @media (max-width: 700px) {
+    .country-container:hover {
+    transform: none;
+}
+
     .country__page {
         padding-top: 30px;
     }
@@ -339,7 +348,7 @@ span {
 
     .app-body .filters .select-bar select {
         width: 40%;
-        margin-top: 30px;
+        margin-top: 20px;
     }
 }
 
