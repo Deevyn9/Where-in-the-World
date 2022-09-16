@@ -267,6 +267,10 @@ span {
         gap: 0;
     }
 
+    .country-container {
+        margin-bottom: 20px;
+    }
+
     .main__countrydetails {
         align-self: flex-start;
         margin-top: 30px;
