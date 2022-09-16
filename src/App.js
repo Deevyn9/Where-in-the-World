@@ -46,7 +46,7 @@ function App() {
     if (searchValue.trim()) {
       const fetchSearch = async () => {
         const response = await fetch(
-          `https:restcountries.com/v2/name/${searchValue}`
+          `https://restcountries.com/v2/name/${searchValue}`
         );
         const data = await response.json();
 
