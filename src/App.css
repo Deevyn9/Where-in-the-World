@@ -49,7 +49,8 @@ a {
 
 .app {
   min-height: 100vh;
-  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
   transition: all 0.2s ease;
 }
 
